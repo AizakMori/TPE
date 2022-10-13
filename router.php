@@ -24,6 +24,15 @@ switch ($params[0]){
         $controller = new tableController();
         $controller->showAll();
         break;
+    case 'add':
+        $controller = new tableController();
+        $controller-> tableAdd();
+        break;
+    case 'delete':
+        $controller = new tableController();
+        $id = $params[1];
+        $controller-> tableDelete($id);
+        break;
     default: 
     echo 'error 404';
 } ?>

@@ -17,6 +17,7 @@
              <td class="table-dark">{$valor->normal}</td>
              <td class="table-dark">{$valor->dificil}</td>
              <td class="table-dark">{$valor->habilidad}</td>
+             <td class="table-secondary"><a class="nav-link" href="delete/{$valor->id}">borrar</a></td>
          </tr>
     {/foreach}
 </table>
