@@ -10,6 +10,11 @@ class tableController{
     }
 
     function showHome(){
-        
+        $valores = $this->model->getValores();
+        $this->view->showHome($valores); 
+    }
+    function showDetail(){
+        $detail = $this->model->getDetail();
+        $this->view->showDetail($detail);
     }
 }
