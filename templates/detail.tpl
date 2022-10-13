@@ -1,12 +1,12 @@
 {include file='templates/header.tpl'}
-<h1>Detalles de </h1>
+<h1>Detalles de {$titulo} </h1>
 <table class="table table-dark table-striped">
     <tr>
         <td>Nombre</td>
         <td>Elemento</td>
         <td>velocidad</td>
-        <td>Rendimiento normal</td>
-        <td>Rendimiento dificil</td>
+        <td>Categoria</td>
+        <td>Rendimiento</td>
         <td>habilidad</td>
     </tr>
     {foreach from=$detail item=$valor}
@@ -20,5 +20,4 @@
          </tr>
     {/foreach}
 </table>
-</main>
 {include file= 'templates/footer.tpl'}

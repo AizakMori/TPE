@@ -9,10 +9,19 @@ class tableView{
 
     function showHome($valores){
         $this->smarty->assign('valores',$valores);
+        $this->smarty->assign('titulo', "Summoner's greed");
         $this->smarty->display('table.tpl');
     }
-    function showDetail($detail){
+    function showDetailById($detail){
         $this->smarty->assign('detail',$detail);
+        foreach($detail as $detalle){
+            $this->smarty->assign('titulo',$detalle->nombre);
+        }
         $this->smarty->display('Detail.tpl');
+    }
+    public function showAll($valores){
+        $this->smarty->assign('detail',$valores);
+        $this->smarty->assign('titulo', "Todos");
+        $this->smarty->display('Detail.tpl'); 
     }
 }

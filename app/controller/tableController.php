@@ -9,12 +9,16 @@ class tableController{
         $this->view = new tableView();
     }
 
-    function showHome(){
-        $valores = $this->model->getValores();
+    public function showHome(){
+        $valores =$this->model-> getAllData();
         $this->view->showHome($valores); 
     }
-    function showDetail($id){
+    public function showDetail($id){
         $detail = $this->model->getDetailById($id);
-        $this->view->showDetail($detail);
+        $this->view->showDetailById($detail);
+    }
+    public function showAll(){
+        $valores = $this->model->getAllData();
+        $this->view->showAll($valores);
     }
 }

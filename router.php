@@ -14,12 +14,15 @@ switch ($params[0]){
     case 'home':
         $controller = new tableController();
         $controller->showHome();
-        
         break;
     case 'detail':
         $controller = new tableController();
         $id = $params[1];
         $controller->showDetail($id);
+        break;
+    case 'all':
+        $controller = new tableController();
+        $controller->showAll();
         break;
     default: 
     echo 'error 404';
