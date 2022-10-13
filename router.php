@@ -18,7 +18,8 @@ switch ($params[0]){
         break;
     case 'detail':
         $controller = new tableController();
-        $controller->showDetail();
+        $id = $params[1];
+        $controller->showDetail($id);
         break;
     default: 
     echo 'error 404';

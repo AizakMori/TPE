@@ -12,9 +12,9 @@ class tableModel{
     $valores = $query->fetchAll(PDO::FETCH_OBJ);
     return $valores;
    }
-   public function getDetail(){
-    $query = $this->db->prepare('SELECT FROM invocacion JOIN utilidad ON invocacion.id = utilidad.id_puntos');
-    $query->execute();
+   public function getDetailById($id){
+    $query = $this->db->prepare('SELECT * FROM invocacion JOIN utilidad ON invocacion.id = utilidad.id_puntos WHERE invocacion.id = ?');
+    $query->execute([$id]);
     $detail = $query->fetchAll(PDO::FETCH_OBJ);
     return $detail;
    }

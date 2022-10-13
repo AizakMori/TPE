@@ -13,8 +13,8 @@ class tableController{
         $valores = $this->model->getValores();
         $this->view->showHome($valores); 
     }
-    function showDetail(){
-        $detail = $this->model->getDetail();
+    function showDetail($id){
+        $detail = $this->model->getDetailById($id);
         $this->view->showDetail($detail);
     }
 }

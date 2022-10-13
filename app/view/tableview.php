@@ -12,7 +12,7 @@ class tableView{
         $this->smarty->display('table.tpl');
     }
     function showDetail($detail){
-        $this->smarty->assign('valores',$valores);
+        $this->smarty->assign('detail',$detail);
         $this->smarty->display('Detail.tpl');
     }
 }
