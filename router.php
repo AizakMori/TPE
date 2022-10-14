@@ -33,6 +33,17 @@ switch ($params[0]){
         $id = $params[1];
         $controller-> tableDelete($id);
         break;
-    default: 
+    case 'modif':
+        $controller = new tableController();
+        $id = $params[1];
+        $if = 1;
+        $controller->editTable($id,$if);
+        break;
+    case 'edit':
+        $controller = new tableController();
+        $id = $params[1];
+        $controller->editRow($id);
+        break;
+    default:
     echo 'error 404';
 } ?>

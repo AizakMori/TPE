@@ -7,15 +7,15 @@
 <table class="table table-dark table-striped">
 <tr class="text-center">
 <td>Nombre</td>
-<td>Velocidad</td>
 <td>Categoria</td>
+<td>Rendimiento</td>
 <td>Informacion</td>
 </tr>
 {foreach from=$valores item=$valor}
     <tr class="text-center">
     <td >{$valor->nombre}</td>
-    <td >{$valor->velocidad}</td>
     <td >{$valor->normal}</td>
+    <td >{$valor->dificil}</td>
     <td class="table-secondary"><a class="nav-link" href='detail/{$valor->id}'>detalles</a></td>
     </tr>
 {/foreach}

@@ -24,7 +24,15 @@ class tableModel{
         $query->execute([$nombre,$elemento,$velocidad,$habilidad,$id]);
     }
     public function deleteTable($id){
-        $query = $this->db->prepare('DELETE invocacion.* from invocacion JOIN utilidad ON invocacion.id_puntos = utilidad.id_puntos WHERE invocacion.id = ?;');
-        $query->execute([$id]);
+        $query = $this->db->prepare('DELETE FROM invocacion WHERE id_puntos IN(SELECT id_puntos FROM utilidad WHERE id_puntos= ?);
+        DELETE FROM `utilidad` WHERE `utilidad`.`id_puntos` = ?;');
+        $query->execute([$id,$id]);
+    }
+
+    public function editTable($id,$name,$category,$elemento,$velocidad,$rendimiento,$habilidad){
+        $query = $this->db->prepare('UPDATE utilidad SET  normal = ?, dificil=? WHERE id_puntos= ?;');
+        $query->execute([$category,$rendimiento,$id]);
+        $query = $this->db->prepare('UPDATE invocacion SET  nombre = ?, elemento=?,velocidad= ?, habilidad =? WHERE id_puntos= ?;');
+        $query->execute([$name,$elemento,$velocidad,$habilidad,$id]);
     }
 }

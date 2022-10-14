@@ -12,16 +12,28 @@ class tableView{
         $this->smarty->assign('titulo', "Summoner's greed");
         $this->smarty->display('table.tpl');
     }
-    function showDetailById($detail){
-        $this->smarty->assign('detail',$detail);
-        foreach($detail as $detalle){
-            $this->smarty->assign('titulo',$detalle->nombre);
+    function showDetailById($detail, $if){
+        if($if == 1){
+            $this->smarty->assign('detail',$detail);
+            $this->smarty->assign('edit',true);
+            foreach($detail as $detalle){
+                $this->smarty->assign('titulo',$detalle->nombre);
+                $this->smarty->assign('id',$detalle->id_puntos);
+            }
+            $this->smarty->display('Detail.tpl');
+        }else{
+            $this->smarty->assign('detail',$detail);
+            $this->smarty->assign('edit',0);
+            foreach($detail as $detalle){
+                $this->smarty->assign('titulo',$detalle->nombre);
+            }
+            $this->smarty->display('Detail.tpl');
         }
-        $this->smarty->display('Detail.tpl');
     }
     public function showAll($valores){
         $this->smarty->assign('detail',$valores);
         $this->smarty->assign('titulo', "Todos");
+        $this->smarty->assign('edit', 0);
         $this->smarty->display('Detail.tpl'); 
     }
 }

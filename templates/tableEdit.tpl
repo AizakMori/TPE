@@ -1,13 +1,6 @@
 <div class="container">
-<div class="container text-center"> <h3>Agregar invocacion</h3></div>
-<form action="add" method="POST" class="my-4">
+<form action="edit/{$id}" method="POST" class="my-2">
 <div class="row">
-    <div class="col-2">
-        <div class="form-group">
-            <label>Nro. de invocacion</label>
-            <input name="id" type="text" class="form-control" required>
-        </div>
-    </div>
     <div class="col-2">
         <div class="form-group">
             <label>Nombre</label>
@@ -26,15 +19,15 @@
     </div>
     </div>
     <div class="col-2">
-    <div class="form-group">
-        <label>Elemento</label>
-        <select name="element" class="form-control">
-            <option value="normal">Normal</option>
-            <option value="hielo">Hielo</option>
-            <option value="fuego">Fuego</option>
-            <option value="electro">Electro</option>
-        </select>
-    </div>
+        <div class="form-group">
+            <label>Elemento</label>
+            <select name="elemento" class="form-control">
+                <option value="normal">Normal</option>
+                <option value="hielo">Hielo</option>
+                <option value="fuego">Fuego</option>
+                <option value="electro">Electro</option>
+            </select>
+        </div>
     </div>
     <div class="col-2">
         <div class="form-group">
@@ -63,6 +56,6 @@
     <label>Habilidad</label>
     <textarea name="habilidad" class="form-control" rows="1"></textarea>
 </div>
-<button type="submit" class="btn btn-primary mt-2">Guardar</button>
+<button type="submit" class="btn btn-primary mt-2">Guardar cambios</button>
 </form>
 </div>
