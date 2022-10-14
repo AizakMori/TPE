@@ -1,3 +1,4 @@
+{include file='templates/header.tpl'}
 <div class="container">
 <div class="container text-center"> <h3>Agregar invocacion</h3></div>
 <form action="add" method="POST" class="my-4">
@@ -63,6 +64,31 @@
     <label>Habilidad</label>
     <textarea name="habilidad" class="form-control" rows="1"></textarea>
 </div>
-<button type="submit" class="btn btn-primary mt-2">Guardar</button>
+<button type="submit" class="btn btn-dark mt-2">Añadir</button>
 </form>
 </div>
+<table class="table table-dark table-striped">
+    <tr>
+        <td>Nombre</td>
+        <td>Categoria</td>
+        <td>Elemento</td>
+        <td>velocidad</td>
+        <td>Rendimiento</td>
+        <td>habilidad</td>
+        <td>Nro. invoc</td>
+        <td>Interacciones</td>
+    </tr>
+    {foreach from=$detail item=$valor}
+         <tr >
+            <td >{$valor->nombre}</td>
+            <td>{$valor->normal}</td>
+             <td >{$valor->elemento}</td>
+             <td >{$valor->velocidad}</td>
+             <td >{$valor->dificil}</td>
+             <td >{$valor->habilidad}</td>
+             <td class="table-secondary text-center">{$valor->id_puntos}</td>
+             <td class="table-secondary"><a class="nav-link" href="delete/{$valor->id_puntos}">borrar</a><a class="nav-link" href="modif/{$valor->id}">modificar</a></td>
+         </tr>
+    {/foreach}
+</table>
+{include file= 'templates/footer.tpl'}

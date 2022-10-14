@@ -5,10 +5,10 @@ class tableModel{
     $this->db = new PDO('mysql:host=localhost;'.'dbname=db_tpe;charset=utf8','root','');
    }
    public function getAllData(){
-       $query = $this->db->prepare('SELECT * FROM invocacion JOIN utilidad ON invocacion.id_puntos = utilidad.id_puntos');
-       $query->execute();
-       $valores = $query->fetchAll(PDO::FETCH_OBJ);
-       return $valores;
+            $query = $this->db->prepare('SELECT * FROM invocacion JOIN utilidad ON invocacion.id_puntos = utilidad.id_puntos');
+            $query->execute();
+            $valores = $query->fetchAll(PDO::FETCH_OBJ);
+            return $valores;
     }
     public function getDetailById($id){
      $query = $this->db->prepare('SELECT * FROM invocacion JOIN utilidad ON invocacion.id_puntos = utilidad.id_puntos WHERE invocacion.id = ?');
@@ -34,5 +34,23 @@ class tableModel{
         $query->execute([$category,$rendimiento,$id]);
         $query = $this->db->prepare('UPDATE invocacion SET  nombre = ?, elemento=?,velocidad= ?, habilidad =? WHERE id_puntos= ?;');
         $query->execute([$name,$elemento,$velocidad,$habilidad,$id]);
+    }
+    public function getCategory($categoria){
+        $query = $this->db->prepare('SELECT * FROM utilidad JOIN invocacion ON invocacion.id_puntos = utilidad.id_puntos WHERE normal LIKE ?');
+            $query->execute([$categoria]);
+            $valores = $query->fetchAll(PDO::FETCH_OBJ);
+            return $valores;
+    }
+    public function getRendimiento($rendimiento){
+        $query = $this->db->prepare('SELECT * FROM utilidad JOIN invocacion ON invocacion.id_puntos = utilidad.id_puntos WHERE dificil LIKE ?');
+            $query->execute([$rendimiento]);
+            $valores = $query->fetchAll(PDO::FETCH_OBJ);
+            return $valores;
+    }
+    public function getFilter($category,$rendimiento){
+        $query = $this->db->prepare('SELECT * FROM utilidad JOIN invocacion ON invocacion.id_puntos = utilidad.id_puntos WHERE normal LIKE ? AND dificil LIKE ?');
+            $query->execute([$category,$rendimiento]);
+            $valores = $query->fetchAll(PDO::FETCH_OBJ);
+            return $valores;
     }
 }

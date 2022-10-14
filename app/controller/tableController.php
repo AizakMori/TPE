@@ -10,17 +10,21 @@ class tableController{
     }
 
     public function showHome(){
-        $valores =$this->model-> getAllData();
+        $valores =$this->model->getAllData();
         $this->view->showHome($valores); 
+    }
+    public function showAll(){
+        $valores = $this->model->getAllData();
+        $this->view->showAll($valores);
     }
     public function showDetail($id){
         $detail = $this->model->getDetailById($id);
         $if=0;
         $this->view->showDetailById($detail,$if);
     }
-    public function showAll(){
-        $valores = $this->model->getAllData();
-        $this->view->showAll($valores);
+    public function insertRow(){
+        $valores =$this->model->getAllData();
+        $this->view->showInsert($valores); 
     }
     public function tableAdd(){
         $numero = $_POST['id'];
@@ -31,12 +35,12 @@ class tableController{
         $rendimiento = $_POST['rendimiento'];
         $habilidad = $_POST['habilidad'];
         $this->model->insertTable($numero,$nombre, $elemento,$category,$velocidad,$rendimiento,$habilidad);
-        header('location: '. BASE_URL);
+        header('location: '. BASE_URL . 'agregar');
     }
     public function tableDelete($id){
         $this->model->deleteTable($id);
         // de momento para refrescar y si aprendo otra forma
-        header('location: '. BASE_URL);
+        header('location: '. BASE_URL . '/agregar');
     }
     public function editTable($id,$if){
         $detail = $this->model->getDetailById($id);
@@ -53,5 +57,23 @@ class tableController{
         $habilidad = $_POST['habilidad'];
         $this->model->editTable($id , $nombre ,$category,$elemento,$velocidad,$rendimiento,$habilidad);
         header('location: '. BASE_URL . '/detail/'. $id);
+    }
+    public function filterTable(){ 
+        $categoria = $_POST['categoria'];
+        $rendimiento = $_POST['rendimiento'];
+        if($categoria != "default" && $rendimiento != "default"){
+            $valores = $this->model->getFilter($categoria,$rendimiento);
+            $this->view->showAll($valores);
+        }elseif($categoria == "default" && $rendimiento != "default"){
+                $valores = $this->model->getRendimiento($rendimiento);
+                $this->view->showAll($valores);
+                var_dump($valores);
+        }elseif($categoria !="default" && $rendimiento =="default"){
+            $valores = $this->model->getCategory($categoria);
+            $this->view->showAll($valores);
+        }
+        else{
+            $valores = $this->model->getAllData();
+            $this->view->showAll($valores);}
     }
 }

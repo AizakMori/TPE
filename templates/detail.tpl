@@ -1,6 +1,23 @@
 {include file='templates/header.tpl'}
 <h1>Detalles de {$titulo} </h1>
-<table class="table table-dark table-striped">
+<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+<form action="filtro" method="POST" class="input-group mb-1">
+        <select name="categoria" class="form-select " id="inputGroupSelect01">
+            <option value="default">Categoria</option>
+            <option value="comun">Comun</option>
+            <option value="raro">Raro</option>
+            <option value="epico">Epico</option>
+            <option value="legendario">Legendario</option>
+        </select>
+        <select name="rendimiento" class="form-select" id="inputGroupSelect01">
+            <option value="default">Rendimiento</option>
+            <option value="bajo" class="">bajo</option>
+            <option value="alto" class="">alto</option>
+        </select>
+        <button type="submit" class="btn btn-outline-dark dropdown">Filtrar</button>
+</form>
+</div>
+<table class="table table-dark table-striped-columns">
     <tr>
         <td>Nombre</td>
         <td>Categoria</td>
@@ -8,17 +25,15 @@
         <td>velocidad</td>
         <td>Rendimiento</td>
         <td>habilidad</td>
-        <td>Interacciones</td>
     </tr>
     {foreach from=$detail item=$valor}
-         <tr class="table-dark">
-            <td class="table-dark">{$valor->nombre}</td>
-            <td class="table-dark">{$valor->normal}</td>
-             <td class="table-dark">{$valor->elemento}</td>
-             <td class="table-dark">{$valor->velocidad}</td>
-             <td class="table-dark">{$valor->dificil}</td>
-             <td class="table-dark">{$valor->habilidad}</td>
-             <td class="table-secondary"><a class="nav-link" href="delete/{$valor->id_puntos}">borrar</a><a class="nav-link" href="modif/{$valor->id}">modificar</a></td>
+         <tr >
+            <td >{$valor->nombre}</td>
+            <td class="table-secondary">{$valor->normal}</td>
+             <td >{$valor->elemento}</td>
+             <td >{$valor->velocidad}</td>
+             <td >{$valor->dificil}</td>
+             <td >{$valor->habilidad}</td>
          </tr>
     {/foreach}
 </table>

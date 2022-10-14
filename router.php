@@ -15,6 +15,10 @@ switch ($params[0]){
         $controller = new tableController();
         $controller->showHome();
         break;
+    case 'login':
+        $controller = new authController();
+        $controller->showLogin();
+        break;
     case 'detail':
         $controller = new tableController();
         $id = $params[1];
@@ -23,6 +27,10 @@ switch ($params[0]){
     case 'all':
         $controller = new tableController();
         $controller->showAll();
+        break;
+    case 'agregar':
+        $controller = new tableController();
+        $controller->insertRow();
         break;
     case 'add':
         $controller = new tableController();
@@ -43,6 +51,10 @@ switch ($params[0]){
         $controller = new tableController();
         $id = $params[1];
         $controller->editRow($id);
+        break;
+    case 'filtro':
+            $controller = new tableController();
+            $controller-> filterTable();
         break;
     default:
     echo 'error 404';
