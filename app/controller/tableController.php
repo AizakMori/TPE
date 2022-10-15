@@ -67,7 +67,7 @@ class tableController{
         }elseif($categoria == "default" && $rendimiento != "default"){
                 $valores = $this->model->getRendimiento($rendimiento);
                 $this->view->showAll($valores);
-                var_dump($valores);
+               
         }elseif($categoria !="default" && $rendimiento =="default"){
             $valores = $this->model->getCategory($categoria);
             $this->view->showAll($valores);

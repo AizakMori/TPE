@@ -42,7 +42,7 @@ class tableModel{
             return $valores;
     }
     public function getRendimiento($rendimiento){
-        $query = $this->db->prepare('SELECT * FROM utilidad JOIN invocacion ON invocacion.id_puntos = utilidad.id_puntos WHERE dificil LIKE ?');
+            $query = $this->db->prepare('SELECT * FROM utilidad JOIN invocacion ON invocacion.id_puntos = utilidad.id_puntos WHERE dificil LIKE ?');
             $query->execute([$rendimiento]);
             $valores = $query->fetchAll(PDO::FETCH_OBJ);
             return $valores;

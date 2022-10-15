@@ -7,7 +7,7 @@
 <td>Nombre</td>
 <td >Categoria</td>
 <td>Rendimiento</td>
-<td><button type="button" class="btn btn-outline-light "><a class="nav-link" href="all">Detalle de todos!!</a></button></td>
+<td><button type="button" class="btn btn-outline-light "><a class="nav-link" href="home/all">Detalle de todos!!</a></button></td>
 </tr>
 {foreach from=$valores item=$valor}
     <tr class="text-center">
