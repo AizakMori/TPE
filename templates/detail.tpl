@@ -19,6 +19,7 @@
 </div>
 <table class="table table-dark table-striped-columns">
     <tr>
+        {if $edit == true}<td>Num. invoc</td>{/if}
         <td>Nombre</td>
         <td>Categoria</td>
         <td>Elemento</td>
@@ -28,6 +29,7 @@
     </tr>
     {foreach from=$detail item=$valor}
          <tr >
+            {if $edit == true}<td >{$valor->id_puntos}</td>{/if}
             <td >{$valor->nombre}</td>
             <td class="table-secondary">{$valor->normal}</td>
              <td >{$valor->elemento}</td>
@@ -37,6 +39,4 @@
          </tr>
     {/foreach}
 </table>
-{if $edit == 1}{include file='templates/tableEdit.tpl'}
-    {include file= 'templates/footer.tpl'}
-{else}{include file= 'templates/footer.tpl'}{/if}
+{if $edit == true}{include file='templates/tableEdit.tpl'}{/if}

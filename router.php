@@ -16,21 +16,37 @@ $params = explode('/', $action);
 
 switch ($params[0]){
     case 'home':
+        $all;
         if(empty($params[1])){
-            $controller->showHome();
+            $all = false;
+            $controller->showHome($all);
         }else{
-            $controller->showAll();
+            $all = true;
+            $controller->showHome($all
+        );
         }
         break;
     case 'login':
         $loginController->showLogin();
+        break;
+    case 'validate':
+        $loginController->validateLogin();
+        break;
+    case 'logout':
+        $loginController->logOut();
+        break;
+    case 'signin':
+        $loginController->showSignIn();
+        break;
+    case 'adduser':
+        $loginController->addUser();
         break;
     case 'detail':
         $id = $params[1];
         $controller->showDetail($id);
         break;
     case 'agregar':
-        $controller->insertRow();
+        $controller->goToAdd();
         break;
     case 'add':
         $controller-> tableAdd();
@@ -41,8 +57,7 @@ switch ($params[0]){
         break;
     case 'modif':
         $id = $params[1];
-        $if = 1;
-        $controller->editTable($id,$if);
+        $controller->editTable($id);
         break;
     case 'edit':
         $id = $params[1];

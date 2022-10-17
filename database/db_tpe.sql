@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-10-2022 a las 02:05:59
+-- Tiempo de generación: 17-10-2022 a las 07:30:23
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `db_users` (
   `id` int(11) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(250) NOT NULL,
+  `email` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `password` varchar(255) CHARACTER SET latin1 NOT NULL,
   `nombre` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -38,8 +38,8 @@ CREATE TABLE `db_users` (
 -- Volcado de datos para la tabla `db_users`
 --
 
-INSERT INTO `db_users` (`id`, `email`, `password`, `nombre`) VALUES(1, 'admin@admin', 'YWRtaW4=', 'admin');
-INSERT INTO `db_users` (`id`, `email`, `password`, `nombre`) VALUES(2, 'user@user', 'dXNlcg==', 'usuario');
+INSERT INTO `db_users` (`id`, `email`, `password`, `nombre`) VALUES(1, 'admin@admin', '$argon2id$v=19$m=65536,t=4,p=1$VkQ4MmhhTXdTTE82cDRYSw$kBgcvaYTTqW9cHDLjkybUcqn2uy/ePa1b5yU3eA04/8', 'Administrador');
+INSERT INTO `db_users` (`id`, `email`, `password`, `nombre`) VALUES(2, 'user@user', '$argon2id$v=19$m=65536,t=4,p=1$eC9tQS5IZGZRSnBGWjVzbw$xm05JIL6x42Ez9zzLx07t0lJ3aai5aZzDVZY3uQ72zA', 'Usuario');
 
 -- --------------------------------------------------------
 
@@ -69,6 +69,11 @@ INSERT INTO `invocacion` (`id`, `nombre`, `elemento`, `velocidad`, `habilidad`, 
 INSERT INTO `invocacion` (`id`, `nombre`, `elemento`, `velocidad`, `habilidad`, `id_puntos`) VALUES(25, 'pegajoso(evo)', 'normal', 'baja', 'critico 200% dmg', 25);
 INSERT INTO `invocacion` (`id`, `nombre`, `elemento`, `velocidad`, `habilidad`, `id_puntos`) VALUES(26, 'moca(evo)', 'normal', 'alta', 'mordisco 200% dmg', 5);
 INSERT INTO `invocacion` (`id`, `nombre`, `elemento`, `velocidad`, `habilidad`, `id_puntos`) VALUES(27, 'mr.flamin', 'fuego', 'baja', 'baja 50% de vida a lo largo de 5 seg', 6);
+INSERT INTO `invocacion` (`id`, `nombre`, `elemento`, `velocidad`, `habilidad`, `id_puntos`) VALUES(30, 'flamin', 'fuego', 'baja', 'baja 50% de vida a lo largo de 5 seg', 7);
+INSERT INTO `invocacion` (`id`, `nombre`, `elemento`, `velocidad`, `habilidad`, `id_puntos`) VALUES(31, 'montoncito', 'normal', 'muy alta', 'lanza 3 golpes con un 200% de daño', 8);
+INSERT INTO `invocacion` (`id`, `nombre`, `elemento`, `velocidad`, `habilidad`, `id_puntos`) VALUES(32, 'Kevin', 'normal', 'media', 'dispara un rayo con sus tres cabezas dependiendo del ultimo elemento con el que dispare', 9);
+INSERT INTO `invocacion` (`id`, `nombre`, `elemento`, `velocidad`, `habilidad`, `id_puntos`) VALUES(33, 'capuchino helado', 'hielo', 'muy alta', 'muerde y congela a los enemigos', 10);
+INSERT INTO `invocacion` (`id`, `nombre`, `elemento`, `velocidad`, `habilidad`, `id_puntos`) VALUES(34, 'pyro', 'fuego', 'baja', 'lanza una bola de fuego que baja 50% de vida en area', 11);
 
 -- --------------------------------------------------------
 
@@ -91,6 +96,11 @@ INSERT INTO `utilidad` (`id_puntos`, `normal`, `dificil`) VALUES(3, 'raro', 'alt
 INSERT INTO `utilidad` (`id_puntos`, `normal`, `dificil`) VALUES(4, 'raro', 'bajo');
 INSERT INTO `utilidad` (`id_puntos`, `normal`, `dificil`) VALUES(5, 'raro', 'alto');
 INSERT INTO `utilidad` (`id_puntos`, `normal`, `dificil`) VALUES(6, 'comun', 'bajo');
+INSERT INTO `utilidad` (`id_puntos`, `normal`, `dificil`) VALUES(7, 'comun', 'bajo');
+INSERT INTO `utilidad` (`id_puntos`, `normal`, `dificil`) VALUES(8, 'comun', 'bajo');
+INSERT INTO `utilidad` (`id_puntos`, `normal`, `dificil`) VALUES(9, 'legendario', 'alto');
+INSERT INTO `utilidad` (`id_puntos`, `normal`, `dificil`) VALUES(10, 'raro', 'alto');
+INSERT INTO `utilidad` (`id_puntos`, `normal`, `dificil`) VALUES(11, 'epico', 'bajo');
 INSERT INTO `utilidad` (`id_puntos`, `normal`, `dificil`) VALUES(22, 'epico', 'bajo');
 INSERT INTO `utilidad` (`id_puntos`, `normal`, `dificil`) VALUES(23, 'epico', 'alto');
 INSERT INTO `utilidad` (`id_puntos`, `normal`, `dificil`) VALUES(24, 'legendario', 'alto');
@@ -127,13 +137,13 @@ ALTER TABLE `utilidad`
 -- AUTO_INCREMENT de la tabla `db_users`
 --
 ALTER TABLE `db_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `invocacion`
 --
 ALTER TABLE `invocacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `utilidad`

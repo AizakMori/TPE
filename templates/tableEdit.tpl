@@ -7,6 +7,7 @@
             <input name="name" type="text" class="form-control">
         </div>
     </div>
+    {if (($smarty.session.USER_ID == 1))}
     <div class="col-2">
     <div class="form-group">
         <label>Categoria</label>
@@ -18,6 +19,19 @@
         </select>
     </div>
     </div>
+    {else}
+        <div class="col-2">
+        <div class="form-group">
+            <label>Categoria</label>
+            <select name="category" class="form-control" aria-label="Disabled select example" disabled>
+                <option value="comun">comun</option>
+                <option value="raro">raro</option>
+                <option value="epico">epico</option>
+                <option value="legendario">legendario</option>
+            </select>
+        </div>
+        </div>
+    {/if}
     <div class="col-2">
         <div class="form-group">
             <label>Elemento</label>
@@ -41,6 +55,7 @@
             </select>
         </div>
     </div>
+    {if (($smarty.session.USER_ID == 1))}
     <div class="col-2">
         <div class="form-group">
             <label>Rendimiento</label>
@@ -51,7 +66,17 @@
         </div>
     </div>
     </div>
-
+    {else} <div class="col-2">
+        <div class="form-group" >
+            <label>Rendimiento</label>
+            <select name="rendimiento" class="form-control" aria-label="Disabled select example" disabled>
+                <option value="bajo">bajo</option>
+                <option value="alto">alto</option>
+            </select>
+        </div>
+    </div>
+    </div>
+    {/if}
 <div class="form-group">
     <label>Habilidad</label>
     <textarea name="habilidad" class="form-control" rows="1"></textarea>

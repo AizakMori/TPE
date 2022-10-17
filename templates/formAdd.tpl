@@ -71,23 +71,19 @@
     <tr>
         <td>Nombre</td>
         <td>Categoria</td>
-        <td>Elemento</td>
-        <td>velocidad</td>
         <td>Rendimiento</td>
-        <td>habilidad</td>
         <td>Nro. invoc</td>
-        <td>Interacciones</td>
+        <td class="text-center">!</td>
+        <td class="text-center">!</td>
     </tr>
     {foreach from=$detail item=$valor}
          <tr >
-            <td >{$valor->nombre}</td>
-            <td>{$valor->normal}</td>
-             <td >{$valor->elemento}</td>
-             <td >{$valor->velocidad}</td>
-             <td >{$valor->dificil}</td>
-             <td >{$valor->habilidad}</td>
-             <td class="table-secondary text-center">{$valor->id_puntos}</td>
-             <td class="table-secondary"><a class="nav-link" href="delete/{$valor->id_puntos}">borrar</a><a class="nav-link" href="modif/{$valor->id}">modificar</a></td>
+                <td >{$valor->nombre}</td>
+                <td>{$valor->normal}</td>
+                <td >{$valor->dificil}</td>
+                <td >{$valor->id_puntos}</td>
+                <td class="table-secondary"><strong><a class="nav-link text-center" href="modif/{$valor->id}">Modificar</a></strong></td>
+                <td class="table-secondary"><strong><a class="nav-link text-center" href="delete/{$valor->id_puntos}">Borrar</a></strong></td>
          </tr>
     {/foreach}
 </table>

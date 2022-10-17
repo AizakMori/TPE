@@ -23,14 +23,29 @@
           <a class="nav-link active" aria-current="page" href="home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="login">log in</a>
+          <a class="nav-link" href="home/all">Ver todos</a></button>
         </li>
+        {if isset($smarty.session.USER_ID)}
+          <li class="nav-item">
+            <a class="nav-link" href="agregar">Agregar</a>
+          </li>
+        {/if}
+        {if !isset($smarty.session.USER_ID)}
         <li class="nav-item">
-          <a class="nav-link" href="agregar">Agregar</a>
+            <a  class="nav-link"  href="login">Log in</a>
         </li>
+        {else}
         <li class="nav-item">
-          <a class="nav-link disabled">Aizak</a>
+          <a class="nav-link" href="logout">Log out</a>
         </li>
+      {/if}
+      {if isset($smarty.session.USER_ID)} 
+        <li class="nav-item">
+        <a class="nav-link disabled">{($smarty.session.USER_NAME)}</a>
+        </li> 
+      {else} <li class="nav-item">
+        <a class="nav-link disabled">Invitado</a>
+        </li>  {/if}
       </ul>
     </div>
   </div>
