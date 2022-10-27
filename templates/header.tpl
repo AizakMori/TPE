@@ -23,13 +23,16 @@
           <a class="nav-link active" aria-current="page" href="home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="home/all">Ver todos</a></button>
+          <a class="nav-link" href="all">Ver Invocaciones</a></button>
         </li>
-        {if isset($smarty.session.USER_ID)}
+        <li class="nav-item">
+          <a class="nav-link" href="categories/list">Categorias</a></button>
+        </li>
+        {* {if isset($smarty.session.USER_ID)} *}
           <li class="nav-item">
-            <a class="nav-link" href="agregar">Agregar</a>
+            <a class="nav-link" href="add">Agregar</a>
           </li>
-        {/if}
+        {* {/if} *}
         {if !isset($smarty.session.USER_ID)}
         <li class="nav-item">
             <a  class="nav-link"  href="login">Log in</a>

@@ -1,8 +1,8 @@
 <?php
-require_once 'app/model/tableModel.php';
-require_once 'app/view/tableView.php';
+require_once 'app/model/homeModel.php';
+require_once 'app/view/homeView.php';
 require_once 'app/helpers/authHelper.php';
-class tableController{
+class homeController{
     private $model;
     private $view;
     private $authHelper;
@@ -11,17 +11,39 @@ class tableController{
         $this->view = new tableView();
         $this->authHelper = new AuthHelper();
     }
-
-     function showHome($all){
-            $this -> authHelper -> isLoggedIn();
-            $valores =$this->model->getAllData();
-            if ($all == false){
-                $this->view->showHome($valores); 
-            }
-            else {
-                $this->view->showAll($valores);
-            }
+    function getAllData(){
+        $this -> authHelper -> isLoggedIn();
+        $valores =$this->model->getAllData();
+        return $valores;
     }
+     function showHome(){
+        $this->view->showHome(); 
+    }
+    function showAll(){
+        $valores = $this -> getAllData();
+        $this->view->showAll($valores);
+    }
+
+    /* --------------------------------aca comienza el control de categorias----------------------------*/
+    function showCategories(){
+        $category = $this->model->getCategories();
+        $this->view->showCategories($category);
+    }
+    function showById($id){
+        $category = $this->model->getCategory($id);
+        $this->view->showCategory($category);
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
      function showDetail($id){
@@ -32,28 +54,30 @@ class tableController{
     }
 
 
-     function goToAdd(){
+     function goToAdd($error = null){
+                $category = $this->model->getCategories();
             $this -> authHelper -> checkLoggedIn();
             $valores =$this->model->getAllData();
-            $this->view->showInsert($valores); 
+            $this->view->showInsert($valores, $category); 
     }
-
-    function goToAddInvocation(){}
-    
-    
-    function goToAddCategory(){}
     
 
     public function tableAdd(){
-            $numero = $_POST['id'];
-            $nombre = $_POST['name'];
-            $elemento = $_POST['element'];
-            $category = $_POST['category'];
-            $velocidad = $_POST['speed'];
-            $rendimiento = $_POST['rendimiento'];
-            $habilidad = $_POST['habilidad'];
-            $this->model->insertTable($numero,$nombre, $elemento,$category,$velocidad,$rendimiento,$habilidad);
-            header('location: '. BASE_URL . 'agregar');
+                if(!empty($_POST["id"]) && !empty($_POST["name"]) && !empty($_POST["element"])&& !empty($_POST["speed"]) && !empty($_POST["habilidad"])){
+                        $invocacion = new stdClass();
+                        $invocacion->id_puntos = $_POST['id'];
+                        $invocacion->nombre = $_POST['name'];
+                        $invocacion->elemento = $_POST['element'];
+                       
+                        $invocacion->velocidad = $_POST['speed'];
+                        
+                        $invocacion->habilidad = $_POST['habilidad'];
+                        
+                        $this->model->insertTable($invocacion);
+                        header('location: '. BASE_URL . 'add');
+                }else{
+                        header('location: '. BASE_URL . 'add');
+                }
     }
 
 

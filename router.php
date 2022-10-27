@@ -1,8 +1,8 @@
 <?php 
-require_once 'app/controller/tableController.php';
+require_once 'app/controller/homeController.php';
 require_once 'app/controller/userController.php';
 
-$controller = new tableController();
+$controller = new homeController();
 $loginController = new authController();
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
@@ -16,48 +16,47 @@ $params = explode('/', $action);
 
 switch ($params[0]){
     case 'home':
-        $all;
-        if(empty($params[1])){
-            $all = false;
-            $controller->showHome($all);
-        }else{
-            $all = true;
-            $controller->showHome($all
-        );
+        $controller->showHome();
+        break;
+    case 'all':
+        $controller->showAll();
+        break;
+    case'categories':
+        switch($params[1]){
+            case "list":
+                $controller->showCategories();
+                break;
+            case 'show':
+                $controller->showById($params[2]);
+                break;
         }
-        break;
-    case 'login':
-        $loginController->showLogin();
-        break;
-    case 'validate':
-        $loginController->validateLogin();
-        break;
-    case 'logout':
-        $loginController->logOut();
-        break;
-    case 'signin':
-        $loginController->showSignIn();
-        break;
-    case 'adduser':
-        $loginController->addUser();
         break;
     case 'detail':
         $id = $params[1];
         $controller->showDetail($id);
         break;
-    case 'agregar':
-        if(!empty($params[1])){
-            if($params[1] == "invocacion"){
-                $controller->goToAddInvocation();
-            }else{
-                $controller->goToAddCategory();
-            }
-        }else{
-            $controller->goToAdd();
-        }
-        break;
+    // case 'add':
+    //     if(!empty($params[1])){
+    //         if($params[1] == "invocacion"){
+    //             $controller->goToAddInvocation();
+    //         }else if($params[1] == "categoria"){
+    //             $controller->goToAddCategory();
+    //         }
+    //         else if($params[1]=="sucess"){
+    //             $controller->goToAdd("creado con exito!");
+    //         }
+    //         else {
+    //             $controller->goToAdd("hacen falta datos!");
+    //         }
+    //     }else{
+    //         $controller->goToAdd("Cree su invocacion");
+    //     }
+    //     break;
     case 'add':
-        $controller-> tableAdd();
+            $controller-> goToAdd();
+        break;
+    case 'añadir':
+        $controller->tableAdd();
         break;
     case 'delete':
         $id = $params[1];
@@ -74,6 +73,21 @@ switch ($params[0]){
     case 'filtro':
             $controller-> filterTable();
         break;
+        case 'login':
+            $loginController->showLogin();
+            break;
+        case 'validate':
+            $loginController->validateLogin();
+            break;
+        case 'logout':
+            $loginController->logOut();
+            break;
+        case 'signin':
+            $loginController->showSignIn();
+            break;
+        case 'adduser':
+            $loginController->addUser();
+            break;
     default:
     echo 'error 404';
 } ?>

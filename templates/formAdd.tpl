@@ -1,14 +1,8 @@
 {include file='templates/header.tpl'}
 <div class="container">
 <div class="container text-center"> <h3>Agregar invocacion</h3></div>
-<form action="add" method="POST" class="my-4">
+<form action="añadir" method="POST" class="my-4">
 <div class="row">
-    <div class="col-2">
-        <div class="form-group">
-            <label>Nro. de invocacion</label>
-            <input name="id" type="text" class="form-control" required>
-        </div>
-    </div>
     <div class="col-2">
         <div class="form-group">
             <label>Nombre</label>
@@ -18,11 +12,10 @@
     <div class="col-2">
     <div class="form-group">
         <label>Categoria</label>
-        <select name="category" class="form-control">
-            <option value="comun">comun</option>
-            <option value="raro">raro</option>
-            <option value="epico">epico</option>
-            <option value="legendario">legendario</option>
+        <select name="id" class="form-control">
+            {foreach from=$categoria item=$item}
+                <option value="{$item->id_puntos}">{$item->normal}</option>
+            {/foreach}
         </select>
     </div>
     </div>
@@ -49,7 +42,7 @@
             </select>
         </div>
     </div>
-    <div class="col-2">
+    {* <div class="col-2">
         <div class="form-group">
             <label>Rendimiento</label>
             <select name="rendimiento" class="form-control">
@@ -58,7 +51,7 @@
             </select>
         </div>
     </div>
-    </div>
+    </div> *}
 
 <div class="form-group">
     <label>Habilidad</label>
@@ -83,7 +76,7 @@
                 <td >{$valor->dificil}</td>
                 <td >{$valor->id_puntos}</td>
                 <td class="table-secondary"><strong><a class="nav-link text-center" href="modif/{$valor->id}">Modificar</a></strong></td>
-                <td class="table-secondary"><strong><a class="nav-link text-center" href="delete/{$valor->id_puntos}">Borrar</a></strong></td>
+                <td class="table-secondary"><strong><a class="nav-link text-center" href="delete/{$valor->id}">Borrar</a></strong></td>
          </tr>
     {/foreach}
 </table>
