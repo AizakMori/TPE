@@ -7,17 +7,14 @@ class loginView {
         $this->smarty= new Smarty();
     }
 
-    public function showLogin($session, $error = ""){
+    public function showLogin($error = ""){
         $this -> smarty -> assign('error', $error);
-        $this -> smarty -> assign('session', $session);
         $this -> smarty -> display('./templates/login.tpl');
     }
     public function showHome(){
         header('location: ' . BASE_URL);
     }
-    public function showSignIn($session, $error = ""){
-        $this -> smarty -> assign('error', $error);
-        $this -> smarty -> assign('session', $session);
+    public function showSignIn(){
         $this->smarty->display('templates/signIn.tpl');
     }
     public function failSignIn(){

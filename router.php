@@ -46,7 +46,15 @@ switch ($params[0]){
         $controller->showDetail($id);
         break;
     case 'agregar':
-        $controller->goToAdd();
+        if(!empty($params[1])){
+            if($params[1] == "invocacion"){
+                $controller->goToAddInvocation();
+            }else{
+                $controller->goToAddCategory();
+            }
+        }else{
+            $controller->goToAdd();
+        }
         break;
     case 'add':
         $controller-> tableAdd();

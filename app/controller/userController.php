@@ -15,19 +15,12 @@ class authController{
 
 
     function showLogin(){
-            $session = $this -> authHelper -> isLoggedIn();
-            if(!$session){
-                $this -> view -> showLogin($session);
-            }
-            else{
-                $this->view->showHome();
-            }
-    }  
+                $this -> view -> showLogin($error = null);
+    }
 
 
     function showSignin(){
-            $session = $this -> authHelper -> isLoggedIn();
-            $this -> view -> showSignin($session);
+            $this -> view -> showSignin();
     }
 
 
@@ -42,7 +35,7 @@ class authController{
                 $user = $this -> model -> getUser($email);
             if (!$user) {
                     $this->model->add($name, $email, $passwordUser);
-                    $this -> view -> showLogIn($session, "Usuario Creado");
+                    $this -> view -> showLogIn("Usuario Creado");
                 }else{
                     $this -> view -> failSignIn();
             }  
@@ -56,8 +49,8 @@ class authController{
 
     function logout(){
         $this -> authHelper -> logout();
-        $session = $this -> authHelper -> isLoggedIn();
-        $this -> view -> showHome($session);
+        $this -> authHelper -> isLoggedIn();
+        header("location: ".BASE_URL);
     }
 
     
@@ -76,10 +69,10 @@ class authController{
                 $_SESSION["logged"] = true;
                 $this -> view -> showHome();
             }else{
-                $this -> view -> showLogin($session, "verifique sus datos!");
+                $this -> view -> showLogin("verifique sus datos!");
             }
         }else{
-            $this -> view -> showLogin($session, "no tienes un usuario creado");
+            $this -> view -> showLogin("no tienes un usuario creado");
         }
     }
 }

@@ -38,6 +38,11 @@ class tableController{
             $this->view->showInsert($valores); 
     }
 
+    function goToAddInvocation(){}
+    
+    
+    function goToAddCategory(){}
+    
 
     public function tableAdd(){
             $numero = $_POST['id'];
