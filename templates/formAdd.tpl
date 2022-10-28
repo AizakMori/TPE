@@ -1,7 +1,8 @@
 {include file='templates/header.tpl'}
-<div class="container">
+{if $error == "all" }
+<div class="container " >
 <div class="container text-center"> <h3>Agregar invocacion</h3></div>
-<form action="añadir" method="POST" class="my-4">
+<form action="all/añadir" method="POST" class="my-4">
 <div class="row">
     <div class="col-2">
         <div class="form-group">
@@ -14,7 +15,7 @@
         <label>Categoria</label>
         <select name="id" class="form-control">
             {foreach from=$categoria item=$item}
-                <option value="{$item->id_puntos}">{$item->normal}</option>
+                <option value="{$item->id_puntos}">{$item->category} - {$item->rendimiento}</option>
             {/foreach}
         </select>
     </div>
@@ -42,42 +43,37 @@
             </select>
         </div>
     </div>
-    {* <div class="col-2">
-        <div class="form-group">
-            <label>Rendimiento</label>
-            <select name="rendimiento" class="form-control">
-                <option value="bajo">bajo</option>
-                <option value="alto">alto</option>
-            </select>
-        </div>
-    </div>
-    </div> *}
-
 <div class="form-group">
     <label>Habilidad</label>
     <textarea name="habilidad" class="form-control" rows="1"></textarea>
 </div>
 <button type="submit" class="btn btn-dark mt-2">Añadir</button>
 </form>
+
+        {/if}
+{*---------------------------------------------------------------------categoria---------------------------------------------------------------------*}
+{if $error == "categories"}
+<div class="container text-center"> <h3>Agregar Categoria</h3></div>
+<form action="categories/añadir" method="POST" class="my-4">
+<div class="row">
+<div class="col-auto">
+    <label>Nombre de la categoria</label>
+    <textarea name="newcategory" class="form-control" rows="1" required></textarea>
+    </div>
+   <div class="col-auto">
+        <div class="form-group">
+            <label>Rendimiento</label>
+            <select name="rendimiento" class="form-control">
+                <option value="bajo">bajo</option>
+                <option value="medio">medio</option>
+                <option value="alto">alto</option>
+            </select>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-dark mt-2">Añadir</button>
+    </div>
 </div>
-<table class="table table-dark table-striped">
-    <tr>
-        <td>Nombre</td>
-        <td>Categoria</td>
-        <td>Rendimiento</td>
-        <td>Nro. invoc</td>
-        <td class="text-center">!</td>
-        <td class="text-center">!</td>
-    </tr>
-    {foreach from=$detail item=$valor}
-         <tr >
-                <td >{$valor->nombre}</td>
-                <td>{$valor->normal}</td>
-                <td >{$valor->dificil}</td>
-                <td >{$valor->id_puntos}</td>
-                <td class="table-secondary"><strong><a class="nav-link text-center" href="modif/{$valor->id}">Modificar</a></strong></td>
-                <td class="table-secondary"><strong><a class="nav-link text-center" href="delete/{$valor->id}">Borrar</a></strong></td>
-         </tr>
-    {/foreach}
-</table>
-{include file= 'templates/footer.tpl'}
+</form>
+{/if}
+</div>
+

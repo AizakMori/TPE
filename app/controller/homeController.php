@@ -11,120 +11,125 @@ class homeController{
         $this->view = new tableView();
         $this->authHelper = new AuthHelper();
     }
-    function getAllData(){
+    public function getAllData(){
         $this -> authHelper -> isLoggedIn();
         $valores =$this->model->getAllData();
         return $valores;
     }
      function showHome(){
+        $this -> authHelper -> isLoggedIn();
         $this->view->showHome(); 
     }
     function showAll(){
+        $this -> authHelper -> isLoggedIn();
         $valores = $this -> getAllData();
         $this->view->showAll($valores);
     }
+    function showDetail($id){
+        $this -> authHelper -> isLoggedIn();
+        $detail = $this->model->getDetailById($id);
+        $modif = null;
+        $this->view->showDetailById($detail, $modif);
+    }
+    function goToAdd($error = null){
+        $this -> authHelper -> isLoggedIn();
+        $category = $this->model->getCategories();
+        $valores =$this->model->getAllData();
+        $this->view->showInsert($valores, $category, $error); 
+    }
 
-    /* --------------------------------aca comienza el control de categorias----------------------------*/
+    /* ----------------------------------aca comienza el control de categorias---------------------------------------*/
     function showCategories(){
+        $this -> authHelper -> isLoggedIn();
         $category = $this->model->getCategories();
         $this->view->showCategories($category);
     }
     function showById($id){
         $category = $this->model->getCategory($id);
-        $this->view->showCategory($category);
+        $categories = $this->model->getCategories();
+        $this->view->showCategory($categories, $category);
+    }
+    function categoryAdd(){
+        if(!empty($_POST['newcategory']) && !empty($_POST['rendimiento'])){
+                $newcategory = new stdClass();
+                $newcategory->category = $_POST['newcategory'];
+                $newcategory->rendimiento = $_POST['rendimiento'];
+                $this->model-> insertCategory($newcategory);
+        }
+        header('location: '. BASE_URL . 'categories/list');
+    }
+    function categoryEdit($id){
+        $this->authHelper->checkLoggedIn();
+        $this -> authHelper -> isLoggedIn();
+        $category = $this->model->getCategoryById($id);
+        $this->view->showCategoryEdit($category, $id);
+    }
+    function categoryUpdate($id){
+        if(!empty($_POST['editcategory']) && !empty($_POST['rendimiento'])){
+            $category= new stdClass();
+            $category->category = $_POST['editcategory'];
+            $category->rendimiento=$_POST['rendimiento'];
+            $this->model->updateCategory($category, $id);
+        }
+        header('location: '. BASE_URL . 'categories/list');
+    }
+    function categoryDelete($id){
+        $this->authHelper->checkLoggedIn();
+        $resp = $this->model->deleteCategory($id);
+        $category = $this->model->getCategories();
+        $this->view->showCategories($category, $resp);
     }
 
 
 
 
-
-
-
-
-
-
-
-
-
-     function showDetail($id){
-            $this -> authHelper -> isLoggedIn();
-            $detail = $this->model->getDetailById($id);
-            $modif = false;
-            $this->view->showDetailById($detail, $modif);
+    /*-------------------------------------------------------invocacion------------------------------------------ */
+   
+    public function invocationAdd(){
+        $user = $this->authHelper->checkLoggedIn();
+        if(isset($user)){
+        if(!empty($_POST["id"]) && !empty($_POST["name"]) && !empty($_POST["element"])&& !empty($_POST["speed"]) && !empty($_POST["habilidad"])){
+            $invocacion = new stdClass();
+            $invocacion->id_puntos = $_POST['id'];
+            $invocacion->nombre = $_POST['name'];
+            $invocacion->elemento = $_POST['element'];
+            $invocacion->velocidad = $_POST['speed'];
+            $invocacion->habilidad = $_POST['habilidad'];
+            $this->model->insertInvocation($invocacion);
+            header('location: '. BASE_URL . 'all/list');
+        }else{
+            echo "debe completar todos los campos!";
+        }}
+        else{header('location: ' . BASE_URL . 'login');}
     }
-
-
-     function goToAdd($error = null){
-                $category = $this->model->getCategories();
-            $this -> authHelper -> checkLoggedIn();
-            $valores =$this->model->getAllData();
-            $this->view->showInsert($valores, $category); 
+    public function editInvocation($id){
+        $this->authHelper-> isLoggedIn();
+        $detail = $this->model->getDetailById($id);
+        $categories = $this->model->getCategories();
+        $this->view->showDetailById($detail, $categories);
     }
-    
-
-    public function tableAdd(){
-                if(!empty($_POST["id"]) && !empty($_POST["name"]) && !empty($_POST["element"])&& !empty($_POST["speed"]) && !empty($_POST["habilidad"])){
-                        $invocacion = new stdClass();
-                        $invocacion->id_puntos = $_POST['id'];
-                        $invocacion->nombre = $_POST['name'];
-                        $invocacion->elemento = $_POST['element'];
-                       
-                        $invocacion->velocidad = $_POST['speed'];
-                        
-                        $invocacion->habilidad = $_POST['habilidad'];
-                        
-                        $this->model->insertTable($invocacion);
-                        header('location: '. BASE_URL . 'add');
-                }else{
-                        header('location: '. BASE_URL . 'add');
+    public function invocationEdit($id){
+        $user = $this->authHelper-> checkLoggedIn();
+        if(isset($user)){
+            if(!empty($_POST["id"]) && !empty($_POST["name"]) && !empty($_POST["element"])&& !empty($_POST["speed"]) && !empty($_POST["habilidad"])){
+                $invocacion = new stdClass();
+                $invocacion->id_puntos = $_POST['id'];
+                $invocacion->nombre = $_POST['name'];
+                $invocacion->elemento = $_POST['element'];
+                $invocacion->velocidad = $_POST['speed'];
+                $invocacion->habilidad = $_POST['habilidad'];
+                $this->model->editTable($invocacion);}
+                else{ 
+                    echo 'ERROR: Complete todos los campos del formulario para ingresar los datos.';
                 }
-    }
-
-
-    public function tableDelete($id){
-            $this->model->deleteTable($id);
-            header('location: '. BASE_URL . '/agregar');
-    }
-
-
-    public function editTable($id){
-            $this->authHelper-> isLoggedIn();
-            $detail = $this->model->getDetailById($id);
-            $modif = true;
-            $this->view->showDetailById($detail, $modif);
-    }
-
-
-    public function editRow($id){
-            $nombre = $_POST['name'];
-            $category = $_POST['category'];
-            $elemento = $_POST['elemento'];
-            $velocidad = $_POST['speed'];
-            $rendimiento = $_POST['rendimiento'];
-            $habilidad = $_POST['habilidad'];
-            $this->model->editTable($id , $nombre ,$category,$elemento,$velocidad,$rendimiento,$habilidad);
-            header('location: '. BASE_URL . '/detail/'. $id);
-    }
-
-    
-    public function filterTable(){ 
-            $this -> authHelper -> isLoggedIn();
-            $categoria = $_POST['categoria'];
-            $rendimiento = $_POST['rendimiento'];
-            if($categoria != "default" && $rendimiento != "default"){
-                    $valores = $this->model->getFilter($categoria,$rendimiento);
-                    $this->view->showAll($valores);
-            }elseif($categoria == "default" && $rendimiento != "default"){
-                    $valores = $this->model->getRendimiento($rendimiento);
-                    $this->view->showAll($valores);
-                
-            }elseif($categoria !="default" && $rendimiento =="default"){
-                    $valores = $this->model->getCategory($categoria);
-                    $this->view->showAll($valores);
+                header('location: '. BASE_URL . 'all/list');
+            }else {
+                header('location: ' . BASE_URL . 'login');
             }
-            else{
-                    $valores = $this->model->getAllData();
-                    $this->view->showAll($valores);
-                }
-    }
+        }
+        
+        public function invocationDelete($id){
+                $this->model->deleteInvocation($id);
+                header('location: '. BASE_URL . 'all/list');
+        }
 }

@@ -18,8 +18,31 @@ switch ($params[0]){
     case 'home':
         $controller->showHome();
         break;
+    case 'detail':
+        $id = $params[1];
+        $controller->showDetail($id);
+        break;
     case 'all':
-        $controller->showAll();
+        switch($params[1]){
+            case 'list':
+                $controller->showAll();
+                break;
+            case 'modif':
+                $controller->editInvocation($params[2]);
+                break;
+            case 'delete':
+                $controller-> invocationDelete($params[2]);
+                break;
+            case 'edit':
+                $controller->invocationEdit($params[2]);
+                break;
+            case 'add':
+                $controller-> goToAdd($params[0]);
+                break;
+            case 'añadir':
+                $controller->invocationAdd();
+                break;
+        }
         break;
     case'categories':
         switch($params[1]){
@@ -29,49 +52,22 @@ switch ($params[0]){
             case 'show':
                 $controller->showById($params[2]);
                 break;
+            case 'add':
+                $controller-> goToAdd($params[0]);
+                break;
+            case 'añadir':
+                $controller->categoryAdd();
+                break;
+            case 'modificar':
+                $controller->categoryEdit($params[2]);
+                break;
+            case 'update':
+                $controller->categoryUpdate($params[2]);
+                break;
+            case 'delete':
+                $controller->categoryDelete($params[2]);
+                break;
         }
-        break;
-    case 'detail':
-        $id = $params[1];
-        $controller->showDetail($id);
-        break;
-    // case 'add':
-    //     if(!empty($params[1])){
-    //         if($params[1] == "invocacion"){
-    //             $controller->goToAddInvocation();
-    //         }else if($params[1] == "categoria"){
-    //             $controller->goToAddCategory();
-    //         }
-    //         else if($params[1]=="sucess"){
-    //             $controller->goToAdd("creado con exito!");
-    //         }
-    //         else {
-    //             $controller->goToAdd("hacen falta datos!");
-    //         }
-    //     }else{
-    //         $controller->goToAdd("Cree su invocacion");
-    //     }
-    //     break;
-    case 'add':
-            $controller-> goToAdd();
-        break;
-    case 'añadir':
-        $controller->tableAdd();
-        break;
-    case 'delete':
-        $id = $params[1];
-        $controller-> tableDelete($id);
-        break;
-    case 'modif':
-        $id = $params[1];
-        $controller->editTable($id);
-        break;
-    case 'edit':
-        $id = $params[1];
-        $controller->editRow($id);
-        break;
-    case 'filtro':
-            $controller-> filterTable();
         break;
         case 'login':
             $loginController->showLogin();

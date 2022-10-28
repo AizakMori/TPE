@@ -19,13 +19,13 @@ a tus invocaciones a lo largo de las oleadas. Suerte con tus invocaciones, aca a
 <tr class="text-center">
 <td><strong>Nombre</strong></td>
 <td ><strong>Categoria</strong></td>
-<td><strong>Habilidad</strong></td>
+<td><strong>Detalles</strong></td>
 </tr>
 {foreach from=$valores item=$valor}
     <tr class="text-center">
     <td >{$valor->nombre}</td>
     <td>{$valor->normal}</td>
-    <td>{$valor->habilidad}</td>
+    <td class="table-secondary"><strong><a class="nav-link" href='detail/{$valor->id}'>detalles de {$valor->nombre}</a></strong></td>
     </tr>
 {/foreach}
 </table> *}

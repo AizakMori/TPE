@@ -12,7 +12,7 @@
 <body>
 <header>
 <nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">
+  <div class="container-fluid ">
     <h1 class="navbar-brand">Summoner's greed</h1>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -20,19 +20,14 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="home">Home</a>
+          <a class="nav-link active" aria-current="page" href="home">Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="all">Ver Invocaciones</a></button>
+          <a class="nav-link" href="all/list">Ver Invocaciones</a></button>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="categories/list">Categorias</a></button>
         </li>
-        {* {if isset($smarty.session.USER_ID)} *}
-          <li class="nav-item">
-            <a class="nav-link" href="add">Agregar</a>
-          </li>
-        {* {/if} *}
         {if !isset($smarty.session.USER_ID)}
         <li class="nav-item">
             <a  class="nav-link"  href="login">Log in</a>
@@ -54,4 +49,4 @@
   </div>
 </nav>
   </header>
-  <main>
+  <main >
