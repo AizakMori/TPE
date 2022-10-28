@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-10-2022 a las 22:42:11
+-- Tiempo de generación: 28-10-2022 a las 22:54:03
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `db_tpe`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categoria`
+--
+
+CREATE TABLE `categoria` (
+  `id_puntos` int(11) NOT NULL,
+  `category` varchar(10) NOT NULL,
+  `rendimiento` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`id_puntos`, `category`, `rendimiento`) VALUES
+(1, 'comun', 'bajo'),
+(2, 'raro', 'alto'),
+(3, 'epico', 'bajo'),
+(4, 'leyend', 'alto');
 
 -- --------------------------------------------------------
 
@@ -76,6 +98,12 @@ INSERT INTO `invocacion` (`id`, `img`, `nombre`, `elemento`, `velocidad`, `habil
 --
 
 --
+-- Indices de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`id_puntos`);
+
+--
 -- Indices de la tabla `db_users`
 --
 ALTER TABLE `db_users`
@@ -91,6 +119,12 @@ ALTER TABLE `invocacion`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `id_puntos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `db_users`
