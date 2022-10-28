@@ -7,7 +7,7 @@ class loginView {
         $this->smarty= new Smarty();
     }
 
-    public function showLogin($error = ""){
+    public function showLogin($error = null){
         $this -> smarty -> assign('error', $error);
         $this -> smarty -> display('./templates/login.tpl');
     }

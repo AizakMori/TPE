@@ -57,13 +57,7 @@ class tableModel{
            }
         }
 
-
-
-
-
-
-
-
+/*--------------------------------------------------------invocacion----------------------------------------------------------------------------------- */
 
 
      function getDetailById($id){
@@ -75,8 +69,8 @@ class tableModel{
 
 
      function insertInvocation($invocacion){
-            $query = $this->db->prepare('INSERT INTO invocacion(nombre,elemento,velocidad,habilidad,id_puntos) VALUES (?,?,?,?,?)');
-            $query->execute([$invocacion->nombre,$invocacion->elemento,$invocacion->velocidad,$invocacion->habilidad,$invocacion->id_puntos]);
+            $query = $this->db->prepare('INSERT INTO invocacion(nombre,img,elemento,velocidad,habilidad,id_puntos) VALUES (?,?,?,?,?,?)');
+            $query->execute([$invocacion->nombre,$invocacion->img,$invocacion->elemento,$invocacion->velocidad,$invocacion->habilidad,$invocacion->id_puntos]);
     }
      function deleteInvocation($id){
             $query = $this->db->prepare('DELETE FROM invocacion WHERE id= ?');
@@ -86,18 +80,5 @@ class tableModel{
      function editTable($invocacion){
             $query = $this->db->prepare('UPDATE invocacion SET  nombre = ?, elemento=?,velocidad= ?, habilidad =? WHERE id_puntos= ?;');
             $query->execute([$invocacion->nombre,$invocacion->elemento,$invocacion->velocidad,$invocacion->habilidad,$invocacion->id_puntos]);
-    }
-    
-     function getRendimiento($rendimiento){
-            $query = $this->db->prepare('SELECT * FROM categoria JOIN invocacion ON invocacion.id_puntos = categoria.id_puntos WHERE rendimiento LIKE ?');
-            $query->execute([$rendimiento]);
-            $valores = $query->fetchAll(PDO::FETCH_OBJ);
-            return $valores;
-    }
-     function getFilter($category,$rendimiento){
-            $query = $this->db->prepare('SELECT * FROM categoria JOIN invocacion ON invocacion.id_puntos = categoria.id_puntos WHERE category LIKE ? AND rendimiento LIKE ?');
-            $query->execute([$category,$rendimiento]);
-            $valores = $query->fetchAll(PDO::FETCH_OBJ);
-            return $valores;
     }
 }

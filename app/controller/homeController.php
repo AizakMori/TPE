@@ -16,7 +16,7 @@ class homeController{
         $valores =$this->model->getAllData();
         return $valores;
     }
-     function showHome(){
+    public function showHome(){
         $this -> authHelper -> isLoggedIn();
         $this->view->showHome(); 
     }
@@ -25,13 +25,13 @@ class homeController{
         $valores = $this -> getAllData();
         $this->view->showAll($valores);
     }
-    function showDetail($id){
+    public function showDetail($id){
         $this -> authHelper -> isLoggedIn();
         $detail = $this->model->getDetailById($id);
         $modif = null;
         $this->view->showDetailById($detail, $modif);
     }
-    function goToAdd($error = null){
+    public function goToAdd($error = null){
         $this -> authHelper -> isLoggedIn();
         $category = $this->model->getCategories();
         $valores =$this->model->getAllData();
@@ -39,33 +39,35 @@ class homeController{
     }
 
     /* ----------------------------------aca comienza el control de categorias---------------------------------------*/
-    function showCategories(){
+    public function showCategories(){
         $this -> authHelper -> isLoggedIn();
         $category = $this->model->getCategories();
         $this->view->showCategories($category);
     }
-    function showById($id){
+    public function showById($id){
         $category = $this->model->getCategory($id);
         $categories = $this->model->getCategories();
         $this->view->showCategory($categories, $category);
     }
-    function categoryAdd(){
-        if(!empty($_POST['newcategory']) && !empty($_POST['rendimiento'])){
-                $newcategory = new stdClass();
-                $newcategory->category = $_POST['newcategory'];
-                $newcategory->rendimiento = $_POST['rendimiento'];
-                $this->model-> insertCategory($newcategory);
+    public function categoryAdd(){
+        $user = $this->authHelper->checkLoggedIn();
+        if((isset($user)) && !empty($_POST['newcategory']) && !empty($_POST['rendimiento'])){
+            $newcategory = new stdClass();
+            $newcategory->category = $_POST['newcategory'];
+            $newcategory->rendimiento = $_POST['rendimiento'];
+            $this->model-> insertCategory($newcategory);
         }
         header('location: '. BASE_URL . 'categories/list');
     }
-    function categoryEdit($id){
+    public function categoryEdit($id){
         $this->authHelper->checkLoggedIn();
         $this -> authHelper -> isLoggedIn();
         $category = $this->model->getCategoryById($id);
         $this->view->showCategoryEdit($category, $id);
     }
-    function categoryUpdate($id){
-        if(!empty($_POST['editcategory']) && !empty($_POST['rendimiento'])){
+    public function categoryUpdate($id){
+        $user = $this->authHelper->checkLoggedIn();
+        if((isset($user)) && !empty($_POST['editcategory']) && !empty($_POST['rendimiento'])){
             $category= new stdClass();
             $category->category = $_POST['editcategory'];
             $category->rendimiento=$_POST['rendimiento'];
@@ -73,7 +75,7 @@ class homeController{
         }
         header('location: '. BASE_URL . 'categories/list');
     }
-    function categoryDelete($id){
+    public function categoryDelete($id){
         $this->authHelper->checkLoggedIn();
         $resp = $this->model->deleteCategory($id);
         $category = $this->model->getCategories();
@@ -81,26 +83,26 @@ class homeController{
     }
 
 
-
-
     /*-------------------------------------------------------invocacion------------------------------------------ */
    
     public function invocationAdd(){
         $user = $this->authHelper->checkLoggedIn();
-        if(isset($user)){
-        if(!empty($_POST["id"]) && !empty($_POST["name"]) && !empty($_POST["element"])&& !empty($_POST["speed"]) && !empty($_POST["habilidad"])){
+        if((isset($user)) && !empty($_POST["id"]) && !empty($_POST["name"]) && !empty($_POST["element"])&& !empty($_POST["speed"]) && !empty($_POST["habilidad"]) && !empty($_FILES)){
             $invocacion = new stdClass();
             $invocacion->id_puntos = $_POST['id'];
             $invocacion->nombre = $_POST['name'];
             $invocacion->elemento = $_POST['element'];
             $invocacion->velocidad = $_POST['speed'];
             $invocacion->habilidad = $_POST['habilidad'];
+            if (($_FILES['img']['type'] == "image/jpeg" || $_FILES['img']['type'] == "image/jpg" || $_FILES['img']['type'] == "image/png" || $_FILES['img']['type'] == "image/gif" || $_FILES['img']['type'] == "image/webp")) {
+                $imagen = 'img/' . basename($_FILES['img']['name']);
+                move_uploaded_file($_FILES["img"]['temp_name'],$imagen);
+                $invocacion->img = $imagen;
+            }
             $this->model->insertInvocation($invocacion);
             header('location: '. BASE_URL . 'all/list');
         }else{
-            echo "debe completar todos los campos!";
-        }}
-        else{header('location: ' . BASE_URL . 'login');}
+            header('location: ' . BASE_URL . 'login');}
     }
     public function editInvocation($id){
         $this->authHelper-> isLoggedIn();
@@ -110,14 +112,20 @@ class homeController{
     }
     public function invocationEdit($id){
         $user = $this->authHelper-> checkLoggedIn();
+       
         if(isset($user)){
-            if(!empty($_POST["id"]) && !empty($_POST["name"]) && !empty($_POST["element"])&& !empty($_POST["speed"]) && !empty($_POST["habilidad"])){
+            if(!empty($_POST["id"]) && !empty($_POST["name"]) && !empty($_POST["element"])&& !empty($_POST["speed"]) && !empty($_POST["habilidad"])&& !empty($_FILES["img"])){
                 $invocacion = new stdClass();
                 $invocacion->id_puntos = $_POST['id'];
                 $invocacion->nombre = $_POST['name'];
                 $invocacion->elemento = $_POST['element'];
                 $invocacion->velocidad = $_POST['speed'];
                 $invocacion->habilidad = $_POST['habilidad'];
+                if ($_FILES['img']['type'] == "image/jpeg" || $_FILES['img']['type'] == "image/jpg" || $_FILES['img']['type'] == "image/png" || $_FILES['img']['type'] == "image/gif" || $_FILES['img']['type'] == "image/webp") {
+                    $imagen = 'img/' . basename($_FILES['img']['name']);
+                    move_uploaded_file($_FILES["img"]['temp_name'],$imagen);
+                    $invocacion->img = $imagen;
+                }
                 $this->model->editTable($invocacion);}
                 else{ 
                     echo 'ERROR: Complete todos los campos del formulario para ingresar los datos.';
@@ -129,7 +137,7 @@ class homeController{
         }
         
         public function invocationDelete($id){
-                $this->model->deleteInvocation($id);
-                header('location: '. BASE_URL . 'all/list');
+            $this->model->deleteInvocation($id);
+            header('location: '. BASE_URL . 'all/list');
         }
 }

@@ -2,16 +2,21 @@
 <div class="mb-3">
 <h2>Categorias:</h2>
 <div class="mb-2 mx-2" role="group">
+
 <div div class="mb-3" role="group">
+{if isset($smarty.session.USER_ADMIN) == true}
 <button type="button" class="btn btn-secondary col-2"><a href="categories/add" class="text-decoration-none link-light">Añadir categoria</a></button>
+{/if}
 <h3>Categoria/Rendimiento</h3>
 </div>
   {foreach from=$categories item=$valor}
     <div class="mb-2" role="group">
     <div class="mb-2 btn-group">
     <button type="button" class="btn btn-secondary btn-lg"><a href="categories/show/{$valor->id_puntos}" class="text-decoration-none link-light">{$valor->category}/{$valor->rendimiento}</a></button>
+    {if isset($smarty.session.USER_ADMIN) == true}
     <button type="button" class="btn btn-primary btn-sm"><a href="categories/modificar/{$valor->id_puntos}" class="text-decoration-none link-light">Modificar</a></button>
     <button type="button" class="btn btn-primary btn-sm"><a href="categories/delete/{$valor->id_puntos}" class="text-decoration-none link-light">Eliminar</a></button>
+    {/if}
     </div>
     </div>
 {{/foreach}}

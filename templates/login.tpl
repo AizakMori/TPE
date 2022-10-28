@@ -20,14 +20,14 @@
           <label for="password">Password</label>
           <input type="password" required class="form-control" name="password">
       </div>
-        {if $error == "Usuario Creado"}
-          <div>
-            <p class="alert alert-success mt-3">{$error}</p>
-          </div>
-      {/if}
       <button type="submit" class="btn btn-primary mt-3">Entrar</button>
-  </form>
-  </div>
+      </form>
+      </div>
+      {if $error != null}
+        <div>
+          <p class="alert alert-dark" role="alert">{$error}</p>
+        </div>
+    {/if}
   <div>
     <h4>Si sos nuevo <a href="signin">crea tu usuario aqui</a></h4>
   </div>

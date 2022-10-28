@@ -1,6 +1,10 @@
 <div class="container">
-    <form action="all/edit/{$id}" method="POST" class="my-2">
+    <form enctype="multipart/form-data" action="all/edit/{$id}" method="POST" class="my-2">
     <div class="row">
+        <div class="col-2">
+        <input class="form-group" type="file" name="img"></input>
+        </div>
+        </div>
         <div class="col-2">
             <div class="form-group">
                 <label>Nombre</label>

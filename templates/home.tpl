@@ -12,22 +12,3 @@ Contas con 9 posiciones para colocar a tus invocaciones y utilizarlos para acaba
 a tus invocaciones a lo largo de las oleadas. Suerte con tus invocaciones, aca algunos datos:</p></strong>
 </div>
 </div>
-{* <div class="container text-center">
-    <h3>Tabla de invocaciones</h3> 
-</div>
-<table class="table table-dark table-striped">
-<tr class="text-center">
-<td><strong>Nombre</strong></td>
-<td ><strong>Categoria</strong></td>
-<td><strong>Detalles</strong></td>
-</tr>
-{foreach from=$valores item=$valor}
-    <tr class="text-center">
-    <td >{$valor->nombre}</td>
-    <td>{$valor->normal}</td>
-    <td class="table-secondary"><strong><a class="nav-link" href='detail/{$valor->id}'>detalles de {$valor->nombre}</a></strong></td>
-    </tr>
-{/foreach}
-</table> *}
-
-{include file= 'templates/footer.tpl'}

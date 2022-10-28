@@ -12,22 +12,20 @@ class authController{
             $this->view= new loginView();
             $this->authHelper = new authHelper();
     }
-
-
-    function showLogin(){
+    public function showLogin(){
                 $this -> view -> showLogin($error = null);
     }
 
 
-    function showSignin(){
+    public function showSignin(){
             $this -> view -> showSignin();
     }
 
 
 
-    function addUser(){
-            $session = $this -> authHelper -> isLoggedIn();
-        if(!empty($_POST['email']) && !empty($_POST['password'])){
+    public function addUser(){
+        $user = $this -> authHelper -> checkLoggedIn();
+        if(isset($user) && !empty($_POST['email']) && !empty($_POST['password'])){
                 $name = $_POST['name'];
                 $email = $_POST['email'];
                 $password = $_POST['password'];
@@ -45,34 +43,40 @@ class authController{
         }
     }
 
-
-
-    function logout(){
+    public function logout(){
         $this -> authHelper -> logout();
         $this -> authHelper -> isLoggedIn();
         header("location: ".BASE_URL);
     }
 
-    
 
-    function validateLogin(){
-        $session = $this -> authHelper -> isLoggedIn();
-        if(!empty($_POST['email']) && !empty($_POST['password']) && !$session){
+    public function validateLogin(){
+        $user = $this -> authHelper -> isLoggedIn();
+        if(!isset($user) && !empty($_POST['email']) && !empty($_POST['password'])){
             $email = $_POST['email'];
             $userPassword = $_POST['password'];
             $user = $this -> model -> getUser($email);
             if($user and password_verify($userPassword, $user->password)){
                 session_start();
+                if($user->id == 1){
+                    $_SESSION["USER_MAIL"] = $user -> email;
+                    $_SESSION["USER_ID"] = $user -> id;
+                    $_SESSION["USER_NAME"] = $user -> nombre;
+                    $_SESSION["logged"] = true;
+                    $_SESSION["USER_ADMIN"]=true;
+                }else{
                 $_SESSION["USER_MAIL"] = $user -> email;
                 $_SESSION["USER_ID"] = $user -> id;
                 $_SESSION["USER_NAME"] = $user -> nombre;
-                $_SESSION["logged"] = true;
+                $_SESSION["logged"] = true;}
                 $this -> view -> showHome();
             }else{
-                $this -> view -> showLogin("verifique sus datos!");
+                $resp = "verifique sus datos!";
+                $this -> view -> showLogin($resp);
             }
         }else{
-            $this -> view -> showLogin("no tienes un usuario creado");
+            $resp = "su usuario no existe, cree uno! ;)";
+            $this -> view -> showLogin($resp);
         }
     }
 }

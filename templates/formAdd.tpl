@@ -2,8 +2,11 @@
 {if $error == "all" }
 <div class="container " >
 <div class="container text-center"> <h3>Agregar invocacion</h3></div>
-<form action="all/añadir" method="POST" class="my-4">
+<form enctype="multipart/form-data" action="all/añadir" method="POST" class="my-4">
 <div class="row">
+    <div >
+    <input class="form-group" type="file" name="img"></input>
+    </div>
     <div class="col-2">
         <div class="form-group">
             <label>Nombre</label>
