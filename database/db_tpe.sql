@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-10-2022 a las 22:54:03
+-- Tiempo de generación: 14-11-2022 a las 02:24:10
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `db_tpe`
 --
+CREATE DATABASE IF NOT EXISTS `db_tpe` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `db_tpe`;
 
 -- --------------------------------------------------------
 
@@ -37,11 +39,10 @@ CREATE TABLE `categoria` (
 -- Volcado de datos para la tabla `categoria`
 --
 
-INSERT INTO `categoria` (`id_puntos`, `category`, `rendimiento`) VALUES
-(1, 'comun', 'bajo'),
-(2, 'raro', 'alto'),
-(3, 'epico', 'bajo'),
-(4, 'leyend', 'alto');
+INSERT INTO `categoria` (`id_puntos`, `category`, `rendimiento`) VALUES(1, 'comun', 'bajo');
+INSERT INTO `categoria` (`id_puntos`, `category`, `rendimiento`) VALUES(2, 'raro', 'alto');
+INSERT INTO `categoria` (`id_puntos`, `category`, `rendimiento`) VALUES(3, 'epico', 'bajo');
+INSERT INTO `categoria` (`id_puntos`, `category`, `rendimiento`) VALUES(4, 'leyend', 'alto');
 
 -- --------------------------------------------------------
 
@@ -60,9 +61,8 @@ CREATE TABLE `db_users` (
 -- Volcado de datos para la tabla `db_users`
 --
 
-INSERT INTO `db_users` (`id`, `email`, `password`, `nombre`) VALUES
-(1, 'admin@admin', '$argon2id$v=19$m=65536,t=4,p=1$VkQ4MmhhTXdTTE82cDRYSw$kBgcvaYTTqW9cHDLjkybUcqn2uy/ePa1b5yU3eA04/8', 'Administrador'),
-(2, 'user@user', '$argon2id$v=19$m=65536,t=4,p=1$eC9tQS5IZGZRSnBGWjVzbw$xm05JIL6x42Ez9zzLx07t0lJ3aai5aZzDVZY3uQ72zA', 'Usuario');
+INSERT INTO `db_users` (`id`, `email`, `password`, `nombre`) VALUES(1, 'admin@admin', '$argon2id$v=19$m=65536,t=4,p=1$VkQ4MmhhTXdTTE82cDRYSw$kBgcvaYTTqW9cHDLjkybUcqn2uy/ePa1b5yU3eA04/8', 'Administrador');
+INSERT INTO `db_users` (`id`, `email`, `password`, `nombre`) VALUES(2, 'user@user', '$argon2id$v=19$m=65536,t=4,p=1$eC9tQS5IZGZRSnBGWjVzbw$xm05JIL6x42Ez9zzLx07t0lJ3aai5aZzDVZY3uQ72zA', 'Usuario');
 
 -- --------------------------------------------------------
 
@@ -84,14 +84,12 @@ CREATE TABLE `invocacion` (
 -- Volcado de datos para la tabla `invocacion`
 --
 
-INSERT INTO `invocacion` (`id`, `img`, `nombre`, `elemento`, `velocidad`, `habilidad`, `id_puntos`) VALUES
-(39, '', 'teddy', 'normal', 'muy baja', 'stun en area', 3),
-(40, '', 'rey cieno', 'normal', 'baja', 'stun en toda la pantalla', 4),
-(45, '', 'capuchino', 'hielo', 'muy alta', 'mordisco que congela', 2),
-(46, '', 'pegajoso(evo)', 'normal', 'baja', 'critico 200%', 1),
-(50, '', 'AizakFurry', 'normal', 'muy alta', 'owo', 1),
-(62, 'img/devon-icon.jpg', 'devon', 'normal', 'muy alta', 'qwe', 1),
-(63, 'img/kevin-icon.jpg', 'kevin', 'normal', 'media', 'rayo laser con las 3 cabezas', 4);
+INSERT INTO `invocacion` (`id`, `img`, `nombre`, `elemento`, `velocidad`, `habilidad`, `id_puntos`) VALUES(1, '', 'teddy', 'normal', 'muy baja', 'stun en area', 3);
+INSERT INTO `invocacion` (`id`, `img`, `nombre`, `elemento`, `velocidad`, `habilidad`, `id_puntos`) VALUES(2, '', 'rey cieno', 'normal', 'baja', 'stun en toda la pantalla', 4);
+INSERT INTO `invocacion` (`id`, `img`, `nombre`, `elemento`, `velocidad`, `habilidad`, `id_puntos`) VALUES(3, '', 'capuchino', 'hielo', 'muy alta', 'mordisco que congela', 2);
+INSERT INTO `invocacion` (`id`, `img`, `nombre`, `elemento`, `velocidad`, `habilidad`, `id_puntos`) VALUES(4, '', 'pegajoso(evo)', 'normal', 'baja', 'critico 200%', 1);
+INSERT INTO `invocacion` (`id`, `img`, `nombre`, `elemento`, `velocidad`, `habilidad`, `id_puntos`) VALUES(5, 'img/devon-icon.jpg', 'devon', 'normal', 'muy alta', 'qwe', 1);
+INSERT INTO `invocacion` (`id`, `img`, `nombre`, `elemento`, `velocidad`, `habilidad`, `id_puntos`) VALUES(6, 'img/kevin-icon.jpg', 'kevin', 'normal', 'media', 'rayo laser con las 3 cabezas', 4);
 
 --
 -- Índices para tablas volcadas
@@ -136,7 +134,7 @@ ALTER TABLE `db_users`
 -- AUTO_INCREMENT de la tabla `invocacion`
 --
 ALTER TABLE `invocacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
